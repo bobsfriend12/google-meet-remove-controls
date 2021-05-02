@@ -1,0 +1,19 @@
+{
+	"name": "Google Meet Remove Controls",
+	"description": "Removes everything except for the videos from Google Meet",
+	"version": "1.0",
+	"manifest_version": 3,
+	"permissions": ["tabs", "storage"],
+	"host_permissions": ["*://meet.google.com/"],
+	"author": "bobsfriend12",
+	"action": {
+		"default_popup": "popup.html",
+		"default_title": "Hide Controls"
+	},
+	"content_scripts": [
+		{
+			"matches": ["*://meet.google.com/*"],
+			"js": ["content.js"]
+		}
+	]
+}

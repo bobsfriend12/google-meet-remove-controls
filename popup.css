@@ -1,0 +1,25 @@
+html {
+	min-width: 150px;
+}
+
+body {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 1em;
+	text-align: center;
+}
+
+.btn {
+	color: white;
+	text-decoration: none;
+	background-color: hsl(180, 100%, 27%);
+	padding: 0.5em;
+	align-self: stretch;
+	max-width: 150px;
+}
+
+.btn:hover {
+	background-color: hsl(180, 100%, 20%);
+}
