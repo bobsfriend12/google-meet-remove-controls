@@ -78,6 +78,15 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 		namesHidden = false;
 	}
 
+	chrome.runtime.sendMessage(
+		{
+			type: "updateContext",
+			controlsHidden: controlsHidden,
+			namesHidden: namesHidden,
+		},
+		function (response) {}
+	);
+
 	//Send success response.
 	sendResponse({
 		status: "success",
