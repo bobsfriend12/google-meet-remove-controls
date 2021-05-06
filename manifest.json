@@ -9,7 +9,7 @@
 		"128": "logo128.png"
 	},
 	"homepage_url": "https://github.com/bobsfriend12/google-meet-remove-controls",
-	"version": "1.0",
+	"version": "1.1",
 	"manifest_version": 3,
 
 	"permissions": ["tabs", "contextMenus"],
