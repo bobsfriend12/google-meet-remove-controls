@@ -12,15 +12,12 @@
 	"version": "1.1",
 	"manifest_version": 3,
 
-	"permissions": ["tabs"],
+	"permissions": ["tabs", "activeTab", "webNavigation", "scripting"],
 	"action": {
 		"default_popup": "popup.html",
 		"default_title": "Hide Controls"
 	},
-	"content_scripts": [
-		{
-			"matches": ["https://meet.google.com/*"],
-			"js": ["content.js"]
-		}
-	]
+	"background": {
+		"service_worker": "background.js"
+	}
 }
