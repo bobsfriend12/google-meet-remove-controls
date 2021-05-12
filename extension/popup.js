@@ -17,7 +17,6 @@ function updateBtns() {
 
 chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
 	chrome.tabs.sendMessage(tabs[0].id, { type: "query" }, response => {
-		console.log(response);
 		controlsHidden = response.controlsHidden;
 		namesHidden = response.namesHidden;
 		updateBtns();

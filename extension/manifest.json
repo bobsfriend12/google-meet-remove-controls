@@ -1,5 +1,5 @@
 {
-	"name": "Google Meet Remove Controls",
+	"name": "Remove Controls for Google Meet",
 	"description": "Removes everything except for the videos from Google Meet",
 	"author": "bobsfriend12",
 	"icons": {
@@ -9,10 +9,10 @@
 		"128": "logo128.png"
 	},
 	"homepage_url": "https://github.com/bobsfriend12/google-meet-remove-controls",
-	"version": "1.1",
+	"version": "1.1.1",
 	"manifest_version": 3,
 
-	"permissions": ["tabs", "activeTab", "webNavigation", "scripting"],
+	"permissions": ["activeTab", "webNavigation", "scripting"],
 	"action": {
 		"default_popup": "popup.html",
 		"default_title": "Hide Controls"

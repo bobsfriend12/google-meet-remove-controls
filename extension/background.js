@@ -16,13 +16,11 @@ function injectContentScript() {
 //#region message handler
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 	if (request.type === "updateContext") {
-		console.log(request);
 		updateContextMenus(request.controlsHidden, request.namesHidden);
 	}
 });
 
-chrome.webNavigation.onCompleted.addListener(details => {
-	console.log(details);
+chrome.webNavigation.onCompleted.addListener(() => {
 	injectContentScript();
 });
 
