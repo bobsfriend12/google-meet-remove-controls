@@ -4,7 +4,7 @@ const both = document.getElementById("both");
 let controlsHidden, namesHidden;
 
 chrome.runtime.sendMessage({type: 'injectContent'}, () => {
-	
+	//I put the whole thing in the function so that is executes after the content script is loaded.
 	
 	function showBtns() {
 		const btnContainer = document.getElementsByClassName('btn-container')[0];
@@ -20,7 +20,7 @@ chrome.runtime.sendMessage({type: 'injectContent'}, () => {
 			showBtns();
 		}
 
-
+		//Set the buttons to have the right text.
 		if (controlsHidden === true && namesHidden === true) {
 			controls.innerText = "Unhide Controls";
 			names.innerText = "Unhide Names";
@@ -32,6 +32,9 @@ chrome.runtime.sendMessage({type: 'injectContent'}, () => {
 		}
 	}
 
+
+	//Get the controlsHidden and namesHidden varibles from the content script
+	//then run update btns
 	chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
 		chrome.tabs.sendMessage(tabs[0].id, { type: "query" }, response => {
 			controlsHidden = response.controlsHidden;
@@ -44,19 +47,25 @@ chrome.runtime.sendMessage({type: 'injectContent'}, () => {
 		e.preventDefault();
 		let type;
 
+		//change the type based on the text in the buttons
+		//using the text in the buttons as varibles
+		//smart right?
 		if (controls.innerText === "Unhide Controls") {
 			type = "unhideControls";
 		} else {
 			type = "hideControls";
 		}
 
+		//get the current tab
 		chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+			//tell it to do the action
+			//it could be to hide or unhide
 			chrome.tabs.sendMessage(
 				tabs[0].id,
 				{ type: type },
 				function (response) {
-					if (
-						response.controlsHidden === true &&
+					//change the buttons to the oposite of what they were
+					if (e.controlsHidden === true &&
 						response.namesHidden === true
 					) {
 						controls.innerText = "Unhide Controls";
@@ -96,6 +105,8 @@ chrome.runtime.sendMessage({type: 'injectContent'}, () => {
 		});
 	});
 
+
+	//its the same here as for the last one. Its the same code on a different element.
 	names.addEventListener("click", e => {
 		e.preventDefault();
 		let type;
@@ -149,6 +160,8 @@ chrome.runtime.sendMessage({type: 'injectContent'}, () => {
 		});
 	});
 
+
+	//and again here.
 	both.addEventListener("click", e => {
 		e.preventDefault();
 		let type;

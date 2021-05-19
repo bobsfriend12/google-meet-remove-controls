@@ -1,7 +1,6 @@
 //wrap the whole script in a function so that it stays isolated
+//from other injected content scripts
 (function(){
-console.log('content script injected');
-
 //#region Functions
 
 let controlsHidden = false;
@@ -45,12 +44,14 @@ function hideNames() {
 }
 
 function unhideControls() {
+	//get the controls style tag
 	const el = document.getElementById("controls");
-
+	//remove it
 	el.remove();
 }
 
 function unhideNames() {
+	//same here as in the last one
 	const el = document.getElementById("names");
 
 	el.remove();
@@ -94,14 +95,15 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 	}
 
 	//tell the background script to update the context menus
-	chrome.runtime.sendMessage(
-		{
-			type: "updateContext",
-			controlsHidden: controlsHidden,
-			namesHidden: namesHidden,
-		},
-		function (response) {}
-	);
+	//This is for future features, and don't want to remove it.
+	// chrome.runtime.sendMessage(
+	// 	{
+	// 		type: "updateContext",
+	// 		controlsHidden: controlsHidden,
+	// 		namesHidden: namesHidden,
+	// 	},
+	// 	function (response) {}
+	// );
 
 	//Send success response.
 	sendResponse({

@@ -1,10 +1,10 @@
 //#region contentScript
 
 function injectContentScript() {
+	//Search the tabs
 	chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
-		console.log(tabs[0].id);
-
 		const target = tabs[0].id;
+		//Inject the script on the current tab
 		chrome.scripting.executeScript({
 			target: { tabId: target },
 			files: ["content.js"],
@@ -22,10 +22,5 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 		injectContentScript();
 	}
 });
-
-// chrome.action.onClicked.addListener(() => {
-// 	console.log('action clicked');
-// 	injectContentScript();
-// });
 
 //#endregion
