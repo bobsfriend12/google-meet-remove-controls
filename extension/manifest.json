@@ -12,7 +12,7 @@
 	"version": "1.1.1",
 	"manifest_version": 3,
 
-	"permissions": ["activeTab", "webNavigation", "scripting"],
+	"permissions": ["tabs", "activeTab", "webNavigation", "scripting"],
 	"action": {
 		"default_popup": "popup.html",
 		"default_title": "Hide Controls"
