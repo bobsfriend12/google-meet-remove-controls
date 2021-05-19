@@ -1,3 +1,9 @@
+//wrap the whole script in a function so that it stays isolated
+(function(){
+console.log('content script injected');
+
+//#region Functions
+
 let controlsHidden = false;
 let namesHidden = false;
 
@@ -50,34 +56,44 @@ function unhideNames() {
 	el.remove();
 }
 
+//#endregion
+
 //Listen for message telling it to hide controls
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 	//Find what they want to hide and hide it
 
-	if (request.type === "hideControls") {
-		hideControls();
-		controlsHidden = true;
-	} else if (request.type === "hideNames") {
-		hideNames();
-		namesHidden = true;
-	} else if (request.type === "hideBoth") {
-		hideControls();
-		hideNames();
-		controlsHidden = true;
-		namesHidden = true;
-	} else if (request.type === "unhideControls") {
-		unhideControls();
-		controlsHidden = false;
-	} else if (request.type === "unhideNames") {
-		unhideNames();
-		namesHidden = false;
-	} else if (request.type === "unhideBoth") {
-		unhideControls();
-		unhideNames();
-		controlsHidden = false;
-		namesHidden = false;
+	switch(request.type) {
+		case 'hideControls':
+			hideControls();
+			controlsHidden = true;
+			break;
+		case 'hideNames':
+			hideNames();
+			namesHidden = true;
+			break;
+		case 'hideBoth':
+			hideControls();
+			hideNames();
+			controlsHidden = true;
+			namesHidden = true;
+			break;
+		case 'unhideControls':
+			unhideControls();
+			controlsHidden = false;
+			break;
+		case 'unhideNames':
+			unhideNames();
+			namesHidden = false;
+			break;
+		case 'unhideBoth':
+			unhideControls();
+			unhideNames();
+			controlsHidden = false;
+			namesHidden = false;
+			break;
 	}
 
+	//tell the background script to update the context menus
 	chrome.runtime.sendMessage(
 		{
 			type: "updateContext",
@@ -94,3 +110,6 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 		namesHidden: namesHidden,
 	});
 });
+
+//end the wrapping function
+})(); // <- invoke the function (with the last 2 parenthesis.)

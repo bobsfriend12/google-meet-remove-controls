@@ -3,6 +3,7 @@
 function injectContentScript() {
 	chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
 		console.log(tabs[0].id);
+
 		const target = tabs[0].id;
 		chrome.scripting.executeScript({
 			target: { tabId: target },
@@ -16,12 +17,15 @@ function injectContentScript() {
 //#region message handler
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 	if (request.type === "updateContext") {
-		updateContextMenus(request.controlsHidden, request.namesHidden);
+		// updateContextMenus(request.controlsHidden, request.namesHidden);
+	} else if (request.type === "injectContent") {
+		injectContentScript();
 	}
 });
 
-chrome.webNavigation.onCompleted.addListener(() => {
-	injectContentScript();
-});
+// chrome.action.onClicked.addListener(() => {
+// 	console.log('action clicked');
+// 	injectContentScript();
+// });
 
 //#endregion

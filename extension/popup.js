@@ -3,6 +3,8 @@ const names = document.getElementById("names");
 const both = document.getElementById("both");
 let controlsHidden, namesHidden;
 
+chrome.runtime.sendMessage({type: 'injectContent'}, () => {});
+
 function updateBtns() {
 	if (controlsHidden === true && namesHidden === true) {
 		controls.innerText = "Unhide Controls";
@@ -55,6 +57,7 @@ controls.addEventListener("click", e => {
 				) {
 					controls.innerText = "Unhide Controls";
 					names.innerText = "Hide Names";
+					both.innerText = "Hide Both";
 					return;
 				} else if (
 					response.controlsHidden === false &&
@@ -62,6 +65,7 @@ controls.addEventListener("click", e => {
 				) {
 					controls.innerText = "Hide Controls";
 					names.innerText = "Unhide Names";
+					both.innerText = "Hide Both";
 					return;
 				} else if (
 					response.controlsHidden === false &&
@@ -106,6 +110,7 @@ names.addEventListener("click", e => {
 				) {
 					controls.innerText = "Unhide Controls";
 					names.innerText = "Hide Names";
+					both.innerText = "Hide Both";
 					return;
 				} else if (
 					response.controlsHidden === false &&
@@ -113,6 +118,7 @@ names.addEventListener("click", e => {
 				) {
 					controls.innerText = "Hide Controls";
 					names.innerText = "Unhide Names";
+					both.innerText = "Hide Both";
 					return;
 				} else if (
 					response.controlsHidden === false &&
@@ -157,6 +163,7 @@ both.addEventListener("click", e => {
 				) {
 					controls.innerText = "Unhide Controls";
 					names.innerText = "Hide Names";
+					both.innerText = "Hide Both";
 					return;
 				} else if (
 					response.controlsHidden === false &&
@@ -164,6 +171,7 @@ both.addEventListener("click", e => {
 				) {
 					controls.innerText = "Hide Controls";
 					names.innerText = "Unhide Names";
+					both.innerText = "Hide Both";
 					return;
 				} else if (
 					response.controlsHidden === false &&
